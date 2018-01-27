@@ -1,0 +1,48 @@
+dim cr as helper::Chrome
+dim html as c = <<%str%
+<ul>
+   <li>One</li>
+   <li>Two</li>
+   <li>Three</li>
+</ul>
+<p>Here is a paragraph</p>
+<ol>
+   <li>Apples</li>
+   <li>Oranges</li>
+   <li>Bannanas</li>
+</ol>
+
+<table style="width:100%">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th> 
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td> 
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td> 
+    <td>94</td>
+  </tr>
+</table> 
+%str%
+cr.url = "a5file://c:/data/jsEditor/test.html"
+'cr.OpenDevtools()
+ui_dlg_box("Editor",<<%dlg%
+{chrome=150,40cr};
+{startup=set}
+<&Get Source!get> <&Set Source!set>;
+[%HTML%.150,20html]
+%dlg%,<<%code%
+if a_dlg_button = "get" then
+	a_dlg_button = ""
+	html = cr.ExecuteJavascriptResult("document.getElementById('editor').innerHTML")
+else if a_dlg_button = "set" then
+	a_dlg_button = ""
+	cr.SetInnerHtml("editor",html)
+end if
+%code%)

@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <script src="rangy-core.js"></script>
+    <script src="rangy-classapplier.js"></script>
+    <script src="undo.js"></script>
+    <script src="medium.js"></script>
+    <link rel="stylesheet" href="medium.css">
+</head>
+<style>
+    #editor {
+        width: 600px;
+        height: 300px;
+    }
+</style>
+
+<body>
+    <div id="editor"></div>
+    <script>
+        var editorEle = document.getElementById('editor');
+        var container = editorEle.parentNode;
+        new Medium({
+            element: editorEle,
+            modifier: 'auto',
+            placeholder: "",
+            autofocus: false,
+            autoHR: true,
+            mode: Medium.richMode,
+            maxLength: -1,
+            modifiers: {
+                'b': 'bold',
+                'i': 'italicize',
+                'u': 'underline',
+                'v': 'paste'
+            },
+            tags: null,
+            cssClasses: {
+                editor: 'Medium',
+                pasteHook: 'Medium-paste-hook',
+                placeholder: 'Medium-placeholder',
+                clear: 'Medium-clear'
+            },
+            attributes: null,
+            pasteAsText: true,
+            beforeInvokeElement: function() {
+                //this = Medium.Element
+            },
+            beforeInsertHtml: function() {
+                //this = Medium.Html
+            },
+            beforeAddTag: function(tag, shouldFocus, isEditable, afterElement) {},
+            keyContext: null,
+            pasteEventHandler: function(e) {
+                /*default paste event handler*/
+            }
+        });
+    </script>
+</body>
+
+</html>
